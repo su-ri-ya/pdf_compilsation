@@ -189,22 +189,28 @@ app.get('/api/preview/:fileName', (req, res) => {
   fs.createReadStream(filePath).pipe(res);
 });
 
+// Health check for cloud hosts (Render, Railway, etc.)
+app.get('/healthz', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // Serve frontend build if available
 const clientDist = path.join(__dirname, 'client/dist');
 if (fs.existsSync(clientDist)) {
   app.use(express.static(clientDist));
   app.use((req, res, next) => {
     // If not matching an api route, serve index.html
-    if (!req.path.startsWith('/api')) {
+    if (!req.path.startsWith('/api') && req.path !== '/healthz') {
       return res.sendFile(path.join(clientDist, 'index.html'));
     }
     next();
   });
 }
 
-app.listen(PORT, () => {
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
   console.log(`\n======================================================`);
   console.log(`🌐 STP Monthly PDF Report Generator Server Running`);
-  console.log(`🔗 Web UI & API Server: http://localhost:${PORT}`);
+  console.log(`🔗 Web UI & API Server: http://${HOST}:${PORT}`);
   console.log(`======================================================\n`);
 });
