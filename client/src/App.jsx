@@ -219,7 +219,7 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
+            <div className="result-actions" style={{ display: 'flex', gap: 10 }}>
               <a
                 href={result.previewUrl}
                 target="_blank"
@@ -242,28 +242,30 @@ export default function App() {
           {result.sectionStats && result.sectionStats.length > 0 && (
             <div style={{ marginTop: 20 }}>
               <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: 8 }}>Compiled Section Breakdown:</h4>
-              <table className="table-stats">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Section Cover Title</th>
-                    <th>Divider Added</th>
-                    <th>Pages Copied</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {result.sectionStats.map((s, idx) => (
-                    <tr key={idx}>
-                      <td><strong>{s.index}</strong></td>
-                      <td>{s.title}</td>
-                      <td>{s.hasDivider ? '✓ Yes' : '— Skipped'}</td>
-                      <td><strong>{s.pagesIncluded}</strong> / {s.sourceTotalPages}</td>
-                      <td><span style={{ fontSize: '0.8rem', opacity: 0.85 }}>{s.note}</span></td>
+              <div className="table-responsive">
+                <table className="table-stats">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Section Cover Title</th>
+                      <th>Divider Added</th>
+                      <th>Pages Copied</th>
+                      <th>Notes</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {result.sectionStats.map((s, idx) => (
+                      <tr key={idx}>
+                        <td><strong>{s.index}</strong></td>
+                        <td>{s.title}</td>
+                        <td>{s.hasDivider ? '✓ Yes' : '— Skipped'}</td>
+                        <td><strong>{s.pagesIncluded}</strong> / {s.sourceTotalPages}</td>
+                        <td><span style={{ fontSize: '0.8rem', opacity: 0.85 }}>{s.note}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 
@@ -273,6 +275,7 @@ export default function App() {
             <iframe
               src={result.previewUrl}
               title="Master PDF Preview"
+              className="preview-iframe"
               style={{ width: '100%', height: '520px', border: '1px solid #cbd5e1', borderRadius: 8, background: '#fff' }}
             />
           </div>
@@ -523,7 +526,7 @@ export default function App() {
           <button
             type="submit"
             disabled={isGenerating}
-            className="btn btn-primary"
+            className="btn btn-primary btn-submit-main"
             style={{ fontSize: '1.1rem', padding: '14px 36px', minWidth: '280px' }}
           >
             {isGenerating ? (

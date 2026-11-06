@@ -22,27 +22,37 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text-main);
   line-height: 1.5;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px 80px;
+  width: 100%;
 }
 
+/* Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
   background: white;
-  padding: 20px 28px;
+  padding: 16px 20px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -51,46 +61,52 @@ header {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .header-logo {
-  height: 48px;
+  height: 44px;
+  max-width: 150px;
   object-fit: contain;
 }
 
 .header-title h1 {
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   font-weight: 700;
   color: var(--primary);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .header-title p {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.85rem);
   color: var(--text-muted);
 }
 
+/* Cards */
 .card {
   background: var(--card-bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  padding: 24px;
-  margin-bottom: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
   border-bottom: 1px solid var(--border);
   padding-bottom: 12px;
 }
 
 .card-title {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 700;
   color: var(--text-main);
   display: flex;
@@ -98,6 +114,7 @@ header {
   gap: 8px;
 }
 
+/* Responsive Grids */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -110,25 +127,23 @@ header {
   gap: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .grid-2, .grid-3 {
     grid-template-columns: 1fr;
-  }
-  header {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
+    gap: 14px;
   }
 }
 
+/* Forms */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
 }
 
 label {
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -137,14 +152,23 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="file"],
 select {
-  padding: 10px 14px;
+  width: 100%;
+  padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
   color: var(--text-main);
   background: #fdfdfd;
   transition: all 0.2s ease;
+  min-height: 42px;
+}
+
+input[type="file"] {
+  padding: 8px;
+  background: #f8fafc;
+  cursor: pointer;
 }
 
 input[type="text"]:focus,
@@ -155,6 +179,7 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0, 91, 158, 0.15);
 }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -167,6 +192,9 @@ select:focus {
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.9rem;
+  min-height: 40px;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -201,6 +229,7 @@ select:focus {
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
+  min-height: 32px;
 }
 
 .btn-danger-outline:hover {
@@ -210,21 +239,23 @@ select:focus {
 .btn-sm {
   padding: 6px 10px;
   font-size: 0.8rem;
+  min-height: 32px;
 }
 
-/* Cover Preview Box */
+/* Cover Preview Box (Responsive Fluid A4 Ratio) */
 .cover-preview {
   background: #f8fafc;
   border: 2px dashed #cbd5e1;
   border-radius: 10px;
-  padding: 20px;
+  padding: 24px 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  min-height: 200px;
+  min-height: 220px;
+  width: 100%;
 }
 
 .cover-preview-badge {
@@ -239,22 +270,25 @@ select:focus {
 }
 
 .preview-project {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
   font-weight: 800;
   color: var(--primary);
   letter-spacing: 0.05em;
   margin-bottom: 6px;
+  word-break: break-word;
+  line-height: 1.25;
 }
 
 .preview-system {
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
   font-weight: 700;
   color: var(--slate);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  word-break: break-word;
 }
 
 .preview-date {
-  font-size: 1.2rem;
+  font-size: clamp(0.95rem, 3.2vw, 1.25rem);
   font-weight: 800;
   color: var(--primary);
   letter-spacing: 0.05em;
@@ -262,7 +296,7 @@ select:focus {
 }
 
 .preview-report {
-  font-size: 1.15rem;
+  font-size: clamp(0.9rem, 3vw, 1.15rem);
   font-weight: 600;
   color: var(--gray);
 }
@@ -273,10 +307,11 @@ select:focus {
   border: 1px solid #e2e8f0;
   border-left: 4px solid var(--primary);
   border-radius: 8px;
-  padding: 18px;
-  margin-bottom: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
 }
 
 .section-item:hover {
@@ -287,6 +322,8 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
@@ -294,6 +331,13 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.section-badge strong {
+  word-break: break-word;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
 }
 
 .section-num {
@@ -303,58 +347,46 @@ select:focus {
   font-size: 0.8rem;
   padding: 2px 8px;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .section-actions {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-.file-dropzone {
-  border: 1.5px dashed #cbd5e1;
-  background: #f8fafc;
-  border-radius: 8px;
-  padding: 14px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.file-dropzone:hover {
-  background: #f1f5f9;
-  border-color: var(--primary);
+  flex-wrap: wrap;
 }
 
 .file-selected {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 0.85rem;
   color: #065f46;
+  width: 100%;
 }
 
-.manpower-card {
-  margin-top: 10px;
-  background: #fffbeb;
-  border: 1px solid #fef3c7;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 0.85rem;
+.file-selected span {
+  word-break: break-all;
+  flex: 1;
 }
 
-/* Generation Progress & Result */
+/* Status Banner */
 .status-banner {
-  padding: 16px 20px;
+  padding: 14px 16px;
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .status-success {
@@ -369,10 +401,20 @@ select:focus {
   color: #991b1b;
 }
 
+/* Responsive Table Wrapper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
 .table-stats {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
-  margin-top: 14px;
   font-size: 0.85rem;
 }
 
@@ -388,6 +430,7 @@ select:focus {
   color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
+  font-size: 0.75rem;
 }
 
 /* Spinner */
@@ -402,4 +445,57 @@ select:focus {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Mobile Specific Tweaks (< 640px) */
+@media (max-width: 640px) {
+  .container {
+    padding: 12px 10px 60px;
+  }
+
+  header {
+    padding: 14px 14px;
+    margin-bottom: 16px;
+  }
+
+  .header-brand {
+    gap: 10px;
+  }
+
+  .card {
+    padding: 14px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+  }
+
+  .section-item {
+    padding: 12px;
+  }
+
+  .section-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .section-actions .btn {
+    flex: 1;
+  }
+
+  .btn-submit-main {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .result-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .result-actions .btn {
+    width: 100%;
+  }
+
+  .preview-iframe {
+    height: 380px !important;
+  }
 }
