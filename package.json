@@ -1,0 +1,31 @@
+{
+  "name": "stp-report-generator",
+  "version": "1.0.0",
+  "description": "STP Monthly Master PDF Report Generator with React UI and Node.js PDF compiler",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build",
+    "generate": "node generate-report.js",
+    "dev": "node server.js",
+    "test": "node generate-report.js"
+  },
+  "keywords": [
+    "pdf",
+    "stp",
+    "report-generator",
+    "pdf-lib",
+    "react",
+    "express"
+  ],
+  "author": "Nanneer Consultancy",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "pdf-lib": "^1.17.9",
+    "pdfjs-dist": "^4.10.38"
+  }
+}

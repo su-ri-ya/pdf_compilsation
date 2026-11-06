@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Build artifacts
+dist/
+client/dist/
+
+# Large files & output PDFs
+output/
+input/whatsapp-report.pdf
+*.pdf.tmp
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
