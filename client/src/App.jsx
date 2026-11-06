@@ -180,9 +180,11 @@ export default function App() {
 
       setResult(data);
       setProgressMsg('');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error(err);
       setError(err.message || 'An unexpected error occurred during generation.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsGenerating(false);
     }
